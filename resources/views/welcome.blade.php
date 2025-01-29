@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Qalcuity ERP: Solusi Akurat untuk Manajemen Bisnis Modern</title>
+    <meta name="description" content="Qalcuity ERP adalah solusi manajemen bisnis terpadu untuk perusahaan modern. Tingkatkan efisiensi operasional dan produktivitas bisnis Anda.">
+    <meta name="keywords" content="ERP, Enterprise Resource Planning, Manajemen Bisnis, Software Bisnis, Qalcuity">
+    <link rel="icon" type="image/x-icon" href="{{ asset('dist/img/2.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

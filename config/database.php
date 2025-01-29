@@ -62,6 +62,22 @@ return [
             ]) : [],
         ],
 
+        'landlord' => [
+            'driver' => 'mysql',
+            'database' => 'qalcuity_erp_landlord_db',
+            'host' => '127.0.0.1',
+            'username' => 'root',
+            'password' => '',
+        ],
+
+        'tenant' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'database' => null, // This needs to be set dynamically
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
@@ -147,7 +163,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
