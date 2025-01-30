@@ -33,6 +33,8 @@
                 <div class="p-2 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
                     <a href="/">
                         <x-application-logo class="w-20 h-20 fill-current text-white" />
+                        {{-- <img src="{{ asset('dist/img/2.png') }}" alt="Logo"  --}}
+                        {{-- class="w-20 h-20 rounded"> --}}
                     </a>
                 </div>
             </div>
