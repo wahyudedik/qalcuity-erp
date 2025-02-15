@@ -1,8 +1,8 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        {{-- <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
-        </h2>
+        </h2> --}}
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
@@ -35,7 +35,7 @@
                 @endif
                 <input type="file" id="gambar" name="gambar" accept="image/*"
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            </div>
+            </div> 
             <x-input-error class="mt-2" :messages="$errors->get('gambar')" />
         </div>
 

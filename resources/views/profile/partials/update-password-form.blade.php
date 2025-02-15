@@ -1,8 +1,8 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        {{-- <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Update Password') }}
-        </h2>
+        </h2> --}}
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __('Ensure your account is using a long, random password to stay secure.') }}
@@ -11,7 +11,7 @@
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
-        @method('put')
+        @method('put') 
 
         <div>
             <x-input-label for="update_password_current_password" :value="__('Current Password')" />

@@ -22,20 +22,20 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div
-        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative overflow-hidden">
+        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
         <!-- Animated Background Pattern -->
         <div class="absolute inset-0 bg-[url('/public/assets/grid.svg')] opacity-10 bg-repeat"></div>
 
         <!-- Main Content Container -->
         <div class="w-full sm:max-w-md p-8 backdrop-blur-xl bg-white/10 rounded-2xl shadow-2xl border border-white/20">
             <!-- Logo Section -->
-            <div class="flex justify-center mb-8">
+            {{-- <div class="flex justify-center mb-8">
                 <div class="p-2 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
                     <a href="/">
                         <x-application-logo class="w-20 h-20 fill-current text-white" />
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Content Slot -->
             <div class="overflow-hidden">

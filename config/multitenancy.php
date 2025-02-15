@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Tenant;
+use Spatie\Multitenancy\Actions\MigrateTenantAction;
+use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
 use Spatie\Multitenancy\Actions\ForgetCurrentTenantAction;
 use Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction;
-use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
-use Spatie\Multitenancy\Actions\MigrateTenantAction;
-use Spatie\Multitenancy\Models\Tenant;
+
 
 return [
     /*
@@ -14,7 +15,7 @@ return [
      * This class should extend `Spatie\Multitenancy\TenantFinder\TenantFinder`
      *
      */
-    'tenant_finder' => App\Multitenancy\DomainTenantFinder::class,
+    'tenant_finder' => Spatie\Multitenancy\TenantFinder\DomainTenantFinder::class,
 
 
     /*
@@ -60,7 +61,7 @@ return [
     /*
      * The connection name to reach the landlord database.
      */
-    'landlord_database_connection_name' => 'landlord',
+    'landlord_database_connection_name' => 'mysql',
 
     /*
      * This key will be used to associate the current tenant in the context
@@ -76,7 +77,7 @@ return [
      * Set it to `true` if you like to cache the tenant(s) routes
      * in a shared file using the `SwitchRouteCacheTask`.
      */
-    'shared_routes_cache' => false,
+    'shared_routes_cache' => true,
 
     /*
      * You can customize some of the behavior of this package by using your own custom action.
