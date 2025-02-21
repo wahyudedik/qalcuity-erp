@@ -17,13 +17,17 @@ class AuthController extends Controller
             }
 
             $sort = request()->query('sort', 'latest');
+            $search = request()->query('search');
             $tenantsQuery = Tenant::query()
-
                 ->whereHas('tenants', function ($query) {
                     $query->where('users.id', Auth::id());
                 })
-
                 ->withCount('tenants');
+
+            if ($search) {
+                $tenantsQuery->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('domain', 'like', '%' . $search . '%');
+            }
 
             $this->applySorting($tenantsQuery, $sort);
 
@@ -33,7 +37,7 @@ class AuthController extends Controller
                 $query->where('users.id', Auth::id());
             })->count()];
 
-            return view('dashboard', compact('tenants', 'tenantStats', 'sort'));
+            return view('dashboard', compact('tenants', 'tenantStats', 'sort', 'search'));
         }
         return view('auth.login');
     }
@@ -50,5 +54,5 @@ class AuthController extends Controller
             default:
                 $query->latest();
         }
-
-    }}
+    }
+}

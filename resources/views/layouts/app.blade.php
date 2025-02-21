@@ -25,13 +25,38 @@
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='.05' fill='%234B88E5'/%3E%3C/svg%3E");
             background-size: 60px 60px;
         }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gradient-to-br from-blue-100 to-white dark:from-gray-900 dark:to-blue-900 hexagon-bg">
+        <!-- Mobile Menu Button -->
+
+
+        <button id="mobile-menu-button" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-blue-800 text-white hover:bg-blue-700/60 transition-colors">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
         <!-- Sidebar Navigation -->
-        <div class="fixed left-0 top-0 h-full w-64 bg-blue-800 dark:bg-gray-900 shadow-lg">
+        <div
+            class="sidebar fixed left-0 top-0 h-full w-64 bg-blue-800 dark:bg-gray-900 shadow-lg z-40 md:translate-x-0">
             <!-- Welcome Message -->
             <div class="p-6 border-b border-blue-700 dark:border-gray-800">
                 <div class="flex items-center space-x-4">
@@ -51,12 +76,12 @@
         </div>
 
         <!-- Main Content -->
-        <div class="ml-64">
+        <div class="main-content transition-all duration-300 md:ml-64">
             <!-- Top Header -->
             <header class="bg-white dark:bg-gray-900 shadow-sm">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <!-- Location & IP Info -->
-                    <div class="w-96 flex items-center space-x-6">
+                    <div class="hidden md:flex items-center space-x-6">
                         <div
                             class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,11 +117,10 @@
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                 </path>
                             </svg>
-                            {{-- <span class="text-sm font-medium">Notif</span> --}}
                         </button>
 
                         <button
-                            class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                            class="hidden md:flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
                             <a href="/" class="flex items-center">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,9 +134,9 @@
                             <button id="profileButton"
                                 class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-200">
                                 <img src="{{ asset('storage/' . Auth::user()->gambar) }}" alt="User"
-                                    class="w-10 h-10 rounded-full border-2 border-blue-500 shadow-md">
+                                    class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-blue-500 shadow-md">
                                 <span
-                                    class="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">{{ Auth::user()->name }}</span>
+                                    class="hidden md:inline text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">{{ Auth::user()->name }}</span>
                             </button>
                             <div id="profileDropdown"
                                 class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 transform transition-all duration-200">
@@ -131,20 +155,6 @@
                                     </button>
                                 </form>
                             </div>
-                            <script>
-                                const profileButton = document.getElementById('profileButton');
-                                const profileDropdown = document.getElementById('profileDropdown');
-
-                                profileButton.addEventListener('click', () => {
-                                    profileDropdown.classList.toggle('hidden');
-                                });
-
-                                document.addEventListener('click', (event) => {
-                                    if (!profileButton.contains(event.target) && !profileDropdown.contains(event.target)) {
-                                        profileDropdown.classList.add('hidden');
-                                    }
-                                });
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -156,6 +166,31 @@
             </main>
         </div>
     </div>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Profile dropdown functionality
+        const profileButton = document.getElementById('profileButton');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileButton.addEventListener('click', () => {
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!profileButton.contains(event.target) && !profileDropdown.contains(event.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>

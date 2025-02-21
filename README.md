@@ -29,7 +29,8 @@ fitur :
 6. Forgot Password
 7. Konfirmasi Password Baru
 8. Dashboard Tenant
-    - Membuat Database Tenant
-    - Mengedit Database Tenant
-    - Menghapus Database Tenant
+    a. Membuat Database Tenant
+    b. Mengedit Database Tenant
+    c. Menghapus Database Tenant
+    d. Menampilkan data tenant per subdomain
 9. Dashboard Developer

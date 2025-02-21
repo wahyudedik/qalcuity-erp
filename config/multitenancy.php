@@ -34,6 +34,7 @@ return [
         \Spatie\Multitenancy\Tasks\PrefixCacheTask::class,
         \Spatie\Multitenancy\Tasks\SwitchTenantDatabaseTask::class,
         \Spatie\Multitenancy\Tasks\SwitchRouteCacheTask::class,
+        \App\Tasks\SwitchSessionTask::class,
     ],
 
     /*

@@ -35,7 +35,7 @@
                         <x-application-logo class="w-20 h-20 fill-current text-white" />
                         {{-- <img src="{{ asset('dist/img/2.png') }}" alt="Logo"  --}}
                         {{-- class="w-20 h-20 rounded"> --}}
-                    </a>
+                    {{-- </a>
                 </div>
             </div> --}}
 

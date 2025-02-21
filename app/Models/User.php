@@ -12,6 +12,7 @@ use Spatie\Multitenancy\Models\Concerns\UsesLandlordConnection;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
+    
     use HasFactory, Notifiable, UsesLandlordConnection;
 
     protected $table = 'users';

@@ -39,15 +39,21 @@
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Your Businesses</h2>
                     <div class="flex space-x-2">
-                        {{-- Sorting Options --}}
-                        <select onchange="window.location.href='?sort=' + this.value"
+
+                        <!-- sort input -->
+                        <select
+                            onchange="window.location.href='?sort=' + this.value + '&search=' + document.querySelector('input[name=search]').value"
                             class="rounded-lg border-gray-200 dark:border-gray-700 text-sm">
+                            <option value="latest" {{ $sort === 'latest' ? 'selected' : '' }}>Latest</option>
                             <option value="active" {{ $sort === 'active' ? 'selected' : '' }}>Active</option>
                             <option value="inactive" {{ $sort === 'inactive' ? 'selected' : '' }}>Inactive</option>
                         </select>
-                        <!-- New search input -->
+
+                        {{-- Search Bar --}}
                         <div class="relative">
-                            <input type="text" name="search" placeholder="Search businesses..."
+                            <input type="text" name="search" value="{{ $search ?? '' }}"
+                                onchange="window.location.href='?sort={{ $sort }}&search=' + this.value"
+                                placeholder="Search businesses..."
                                 class="w-64 rounded-lg border-gray-200 dark:border-gray-700 text-sm pl-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
@@ -98,7 +104,7 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            <x-dropdown-link href="http://{{ $tenant->domain }}" target="_blank">
+                                            <x-dropdown-link href="http://{{ $tenant->domain }}/home" target="_blank">
                                                 Open
                                             </x-dropdown-link>
 
@@ -123,7 +129,8 @@
                         </div>
 
                         <!-- Edit Tenant Modal -->
-                        <div id="editTenantModal-{{ $tenant->id }}" class="fixed inset-0 z-50 hidden overflow-y-auto">
+                        <div id="editTenantModal-{{ $tenant->id }}"
+                            class="fixed inset-0 z-50 hidden overflow-y-auto">
                             <div class="flex items-center justify-center min-h-screen p-4">
                                 <!-- Modal Backdrop -->
                                 <div class="fixed inset-0 bg-black opacity-50"></div>
@@ -188,7 +195,7 @@
                                             </div>
 
                                             <!-- Status -->
-                                            <div>
+                                            {{-- <div>
                                                 <label
                                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
                                                 <select name="status"
@@ -200,7 +207,7 @@
                                                         {{ $tenant->status === 'inactive' ? 'selected' : '' }}>Inactive
                                                     </option>
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <!-- Modal Footer -->

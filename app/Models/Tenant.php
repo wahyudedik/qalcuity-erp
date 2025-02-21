@@ -40,4 +40,10 @@ class Tenant extends BaseTenant
     {
         return $this->belongsToMany(User::class, 'tenant_user');
     }
+
+    public function hasUser($userId)
+    {
+        return $this->tenants()->where('user_id', $userId)->exists();
+    }
+
 }

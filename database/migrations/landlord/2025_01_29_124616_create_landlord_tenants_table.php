@@ -18,6 +18,6 @@ return new class extends Migration
             $table->string('database')->unique();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
-        });
+        }); 
     }
 };
