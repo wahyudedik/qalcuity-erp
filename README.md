@@ -6,7 +6,7 @@ Dokumen README.md yang Anda miliki sudah cukup komprehensif dan mencakup berbaga
 
 1. Monolitik (Blade + Alpine.js)
 2. Inertia.js (Vue.js/React)
-3. API-First
+3. API-First 
 4. Microservices
 
 Namun, ada beberapa area yang dapat ditingkatkan untuk memastikan panduan ini benar-benar dapat diterapkan untuk semua jenis proyek Laravel:
