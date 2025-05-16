@@ -46,14 +46,14 @@
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                        {{ $header }} 
                     </div>
                 </header>
             @endisset
 
             <!-- Page Content -->
             <main class="flex-1 p-4">
-                {{ $slot }}
+                @yield('content')
             </main>
             
             <!-- Footer -->

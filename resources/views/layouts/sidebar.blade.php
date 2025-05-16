@@ -13,7 +13,7 @@
                     </svg>
                     <span class="ms-3">Dashboard</span>
                 </a> 
-            </li>
+            </li> 
             <li>
                 <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">

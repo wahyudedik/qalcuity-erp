@@ -19,7 +19,7 @@
     @stack('styles')
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased"> 
     <div
         class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
         <div class="mb-4 transform hover:scale-105 transition-transform duration-300">

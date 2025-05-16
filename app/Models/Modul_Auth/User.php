@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Modul_Auth;
 
 use Illuminate\Notifications\Notifiable;
 use App\Models\Modul_Branch\Branch_Model;
@@ -8,11 +8,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail 
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'usertype',
     ];
 
     /**
@@ -51,5 +53,25 @@ class User extends Authenticatable implements MustVerifyEmail
     public function branches()
     {
         return $this->belongsToMany(Branch_Model::class);
+    }
+    
+    /**
+     * Check if user is a developer.
+     *
+     * @return bool
+     */
+    public function isDeveloper(): bool
+    {
+        return $this->usertype === 'dev';
+    }
+    
+    /**
+     * Check if user is a regular user.
+     *
+     * @return bool
+     */
+    public function isRegularUser(): bool
+    {
+        return $this->usertype === 'user';
     }
 }

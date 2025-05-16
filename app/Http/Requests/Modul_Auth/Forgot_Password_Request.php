@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Modul_Branch;
+namespace App\Http\Requests\Modul_Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrancRequest extends FormRequest
+class Forgot_Password_Request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
