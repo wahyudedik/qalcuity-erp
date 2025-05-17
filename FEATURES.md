@@ -1,6 +1,27 @@
 Modul pabrik beton cair:
 0. Auth
+   - Login => Done
+   - Reset/forgot password => Done
+   - remember me => Done
+   - profile user => Done
+
+0. Modul Umum
+   - Chat antar user laravel reverb
+   - cctv
+   - Notifikasi
+   - performance monitoring
+   - pengaturan umum (bahasa, warna, logo, favicon, email, dll)
+
+0. User CRUD and Permission Role
+   - User CRUD
+   - Permission Role CRUD
+   - Permission Role Assignment
+
 0. Multi Cabang
+   - Multi Cabang CRUD
+   - Multi Cabang Assignment
+   - Multi Cabang Reporting
+
 1. Keuangan
   - Akuntansi & Pembukuan 
   - Penggajian 

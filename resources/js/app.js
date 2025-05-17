@@ -1,5 +1,7 @@
 import './bootstrap';
 import 'flowbite';
+import './sidebar';
+import './dark-mode';
 
 import Alpine from 'alpinejs';
 

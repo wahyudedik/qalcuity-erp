@@ -34,35 +34,6 @@ class LoginController extends Controller
     }
 
     /**
-     * Handle API login for dev users.
-     */
-    public function loginApi(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)
-                    ->where('usertype', 'dev')
-                    ->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'The provided credentials are incorrect.',
-            ], 401);
-        }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * Destroy an authenticated session.
      */
     public function logout(Request $request): RedirectResponse

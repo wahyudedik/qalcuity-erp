@@ -13,11 +13,13 @@
     </div>
 
     @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ session('status') }}
+        <div class="mb-4 p-4 rounded-md bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700">
+            <p class="font-medium text-sm text-green-600 dark:text-green-400">
+                {{ session('status') }}
+            </p>
         </div>
     @endif
- 
+    
     <div class="mt-6">
         <form method="POST" action="{{ route('login') }}" class="space-y-6">
             @csrf
@@ -41,11 +43,6 @@
                     <label for="password" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
                         Password
                     </label>
-                    <div class="text-sm">
-                        <a href="#" class="font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
-                            Forgot password?
-                        </a>
-                    </div>
                 </div>
                 <div class="mt-2">
                     <input id="password" name="password" type="password" autocomplete="current-password" required
@@ -56,12 +53,21 @@
                 @enderror
             </div>
 
-            <div class="flex items-center">
-                <input id="remember" name="remember" type="checkbox" 
-                    class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:focus:ring-blue-500">
-                <label for="remember" class="ml-3 block text-sm leading-6 text-gray-700 dark:text-gray-300">
-                    Remember me
-                </label>
+            <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center">
+                    <input id="remember" name="remember" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 dark:focus:ring-blue-500 dark:ring-offset-gray-800">
+                    <label for="remember" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                        Remember me
+                    </label>
+                </div>
+
+                <div class="text-sm">
+                    <a href="{{ route('password.request') }}"
+                        class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
+                        Forgot your password?
+                    </a>
+                </div>
             </div>
 
             <div>

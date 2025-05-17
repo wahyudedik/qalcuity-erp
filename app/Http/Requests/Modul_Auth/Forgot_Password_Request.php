@@ -11,7 +11,7 @@ class Forgot_Password_Request extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Changed to true to allow requests
     }
 
     /**
@@ -22,7 +22,19 @@ class Forgot_Password_Request extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => ['required', 'email', 'exists:users,email'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.exists' => 'We could not find a user with that email address.',
         ];
     }
 }

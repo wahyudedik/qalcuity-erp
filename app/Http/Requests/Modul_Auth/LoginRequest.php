@@ -81,7 +81,7 @@ class LoginRequest extends FormRequest
                 'minutes' => ceil($seconds / 60),
             ]),
         ]);
-    }
+    } 
 
     /**
      * Get the rate limiting throttle key for the request.

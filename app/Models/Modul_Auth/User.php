@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail 
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
@@ -22,9 +22,11 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
         'usertype',
+        'avatar',
     ];
 
     /**
@@ -73,5 +75,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isRegularUser(): bool
     {
         return $this->usertype === 'user';
+    }
+
+    /**
+     * Get avatar URL
+     *
+     * @return string
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if (!$this->avatar) {
+            return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random';
+        }
+
+        if (str_contains($this->avatar, 'http')) {
+            return $this->avatar;
+        }
+
+        return asset('storage/' . $this->avatar);
     }
 }
