@@ -6,7 +6,7 @@ Modul pabrik beton cair:
    - profile user => Done
 
 0. Modul Umum
-   - Chat antar user laravel reverb
+   - Chat antar user laravel reverb => bug web socket dan laravel echo dan user
    - cctv
    - Notifikasi 
    - performance monitoring

@@ -26,7 +26,7 @@ class Participant_Model extends Model
     protected $fillable = [
         'conversation_id',
         'user_id',
-        'last_read_at',
+        'last_read_at', 
         'is_muted',
     ];
 

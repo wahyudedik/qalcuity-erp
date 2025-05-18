@@ -4,6 +4,7 @@ namespace App\Models\Modul_Auth;
 
 use Illuminate\Notifications\Notifiable;
 use App\Models\Modul_Branch\Branch_Model;
+use App\Models\Modul_Umum\User_Online_Status_Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var list<string>
      */
-    protected $fillable = [
+    protected $fillable = [ 
         'name',
         'username',
         'email',
@@ -93,5 +94,10 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return asset('storage/' . $this->avatar);
+    }
+
+    public function onlineStatus()
+    {
+        return $this->hasOne(User_Online_Status_Model::class, 'user_id');
     }
 }

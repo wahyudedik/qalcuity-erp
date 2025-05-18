@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'servers' => [
+    'servers' => [ 
 
         'reverb' => [
             'host' => env('REVERB_SERVER_HOST', '0.0.0.0'),

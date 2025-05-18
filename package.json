@@ -20,6 +20,8 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@soketi/soketi": "^1.6.1",
+        "choices.js": "^11.1.0",
         "flowbite": "^3.1.2"
     }
 }

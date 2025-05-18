@@ -9,7 +9,7 @@ class Chat_Request extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): bool 
     {
         return true; // Changed to true to allow authorized users
     }
@@ -35,8 +35,8 @@ class Chat_Request extends FormRequest
             case 'chat.create-group':
                 $rules = [
                     'name' => 'required|string|max:255',
-                    'user_ids' => 'required|array|min:1',
-                    'user_ids.*' => 'exists:users,id',
+                    'participants' => 'required|array|min:1',
+                    'participants.*' => 'required|uuid|exists:users,id'
                 ];
                 break;
                 

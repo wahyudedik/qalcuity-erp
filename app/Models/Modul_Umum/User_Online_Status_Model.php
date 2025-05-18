@@ -25,7 +25,7 @@ class User_Online_Status_Model extends Model
      */
     protected $fillable = [
         'user_id',
-        'is_online',
+        'is_online', 
         'last_active_at',
     ];
 

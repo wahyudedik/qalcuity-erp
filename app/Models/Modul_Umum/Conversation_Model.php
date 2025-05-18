@@ -24,7 +24,7 @@ class Conversation_Model extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [ 
         'name',
         'type',
         'last_message_at',

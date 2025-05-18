@@ -15,17 +15,16 @@ use Illuminate\Support\Facades\Broadcast;
 */
 
 Broadcast::channel('App.Models.Modul_Auth.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+    return (int) $user->id === (int) $id; 
 });
 
 // Chat channels
-Broadcast::channel('conversation.{conversationId}', function ($user, $conversationId) {
-    return Conversation_Model::find($conversationId)
-        ->participants()
+Broadcast::channel('conversation.{id}', function ($user, $id) {
+    return \App\Models\Modul_Umum\Participant_Model::where('conversation_id', $id)
         ->where('user_id', $user->id)
         ->exists();
 });
 
-Broadcast::channel('user-status', function ($user) {
-    return ['id' => $user->id, 'name' => $user->name];
+Broadcast::channel('user-status', function () {
+    return true;
 });

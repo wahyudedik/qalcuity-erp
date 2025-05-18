@@ -25,7 +25,7 @@ class Message_Model extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [ 
         'conversation_id',
         'user_id',
         'content',

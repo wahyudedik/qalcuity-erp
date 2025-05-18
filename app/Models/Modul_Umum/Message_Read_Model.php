@@ -26,7 +26,7 @@ class Message_Read_Model extends Model
     protected $fillable = [
         'message_id',
         'user_id',
-        'read_at',
+        'read_at', 
     ];
 
     /**

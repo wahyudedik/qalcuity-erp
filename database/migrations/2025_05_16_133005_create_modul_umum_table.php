@@ -56,7 +56,7 @@ return new class extends Migration
             
             // Memastikan satu pesan hanya bisa dibaca sekali oleh satu user
             $table->unique(['message_id', 'user_id']);
-        });
+        }); 
 
         // Tabel untuk online status
         Schema::create('user_online_statuses', function (Blueprint $table) {
@@ -66,6 +66,8 @@ return new class extends Migration
             $table->timestamp('last_active_at')->nullable();
             $table->timestamps();
         });
+
+        // Tabel CCTV
     }
 
     /**

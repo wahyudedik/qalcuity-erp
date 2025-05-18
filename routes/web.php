@@ -17,13 +17,13 @@ Route::get('/', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
-    
+
     // Forgot Password Routes
     Route::get('/forgot-password', [Forgot_Password_Controller::class, 'showForgotPasswordForm'])
         ->name('password.request');
     Route::post('/forgot-password', [Forgot_Password_Controller::class, 'sendResetLinkEmail'])
         ->name('password.email');
-    
+
     // Reset Password Routes
     Route::get('/reset-password/{token}', [Reset_Password_Controller::class, 'showResetForm'])
         ->name('password.reset');
@@ -52,13 +52,13 @@ Route::middleware(['auth', 'auth.user'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     // Profile Routes
     Route::get('/profile', [Profile_Controller::class, 'show'])->name('profile.show');
     Route::put('/profile/update', [Profile_Controller::class, 'update'])->name('profile.update');
     Route::put('/profile/update-password', [Profile_Controller::class, 'updatePassword'])->name('profile.update-password');
     Route::delete('/profile/delete', [Profile_Controller::class, 'delete'])->name('profile.delete');
-    
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
@@ -75,11 +75,7 @@ Route::middleware(['auth', 'auth.user'])->group(function () {
     Route::get('/chat/unread/count', [Chat_Controller::class, 'getUnreadCount'])->name('chat.unread-count');
     Route::post('/chat/offline', [Chat_Controller::class, 'setOffline'])->name('chat.set-offline');
     Route::get('/chat/users/online', [Chat_Controller::class, 'getOnlineUsers'])->name('chat.online-users');
-
-    // Add the missing route
     Route::put('/chat/{conversation}/update', [Chat_Controller::class, 'updateGroupConversation'])->name('chat.update-group');
-
-    // Add other missing routes that might be needed
     Route::post('/chat/{conversation}/upload', [Chat_Controller::class, 'uploadFile'])->name('chat.upload-file');
     Route::post('/chat/{conversation}/mark-read', [Chat_Controller::class, 'markAsRead'])->name('chat.mark-read');
     Route::post('/chat/conversation', [Chat_Controller::class, 'getOrCreateConversation'])->name('chat.get-conversation');
@@ -87,4 +83,7 @@ Route::middleware(['auth', 'auth.user'])->group(function () {
     Route::delete('/chat/{conversation}/participants/{participant}', [Chat_Controller::class, 'removeParticipant'])->name('chat.remove-participant');
     Route::get('/chat/{conversation}/messages', [Chat_Controller::class, 'getMessages'])->name('chat.get-messages');
     Route::post('/chat/status', [Chat_Controller::class, 'updateStatus'])->name('chat.update-status');
+    Route::get('/chat/users', [Chat_Controller::class, 'getUsers'])->name('chat.users');
+    Route::get('/chat/{conversation}/participants/available', [Chat_Controller::class, 'getAvailableParticipants'])
+        ->name('chat.available-participants');
 });
