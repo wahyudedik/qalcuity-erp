@@ -4,7 +4,7 @@
 
 Dokumen README.md yang Anda miliki sudah cukup komprehensif dan mencakup berbagai jenis arsitektur Laravel, termasuk:
 
-1. Monolitik (Blade + Alpine.js)
+1. Monolitik (Blade + Alpine.js) 
 2. Inertia.js (Vue.js/React)
 3. API-First 
 4. Microservices

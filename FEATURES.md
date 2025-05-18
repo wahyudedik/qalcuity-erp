@@ -8,7 +8,7 @@ Modul pabrik beton cair:
 0. Modul Umum
    - Chat antar user laravel reverb
    - cctv
-   - Notifikasi
+   - Notifikasi 
    - performance monitoring
    - pengaturan umum (bahasa, warna, logo, favicon, email, dll)
 
