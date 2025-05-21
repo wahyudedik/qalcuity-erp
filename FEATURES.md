@@ -6,20 +6,20 @@ Modul pabrik beton cair:
    - profile user => Done
 
 0. Modul Umum
-   - Chat antar user laravel reverb => bug web socket dan laravel echo dan user
-   - cctv
+   - Chat antar user => bug web socket dan laravel echo dan user
+   - cctv => Done
    - Notifikasi 
-   - performance monitoring
+   - performance monitoring 
    - pengaturan umum (bahasa, warna, logo, favicon, email, dll)
 
 0. User CRUD and Permission Role
-   - User CRUD
-   - Permission Role CRUD
-   - Permission Role Assignment
+   - User CRUD => Done
+   - Permission Role CRUD 
+   - Permission Role Assignment 
 
 0. Multi Cabang
    - Multi Cabang CRUD
-   - Multi Cabang Assignment
+   - Multi Cabang Assignment 
    - Multi Cabang Reporting
 
 1. Keuangan

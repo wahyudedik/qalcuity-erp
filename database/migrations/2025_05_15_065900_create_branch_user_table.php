@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('branch_user', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id');
+            $table->uuid('user_id');  
             $table->uuid('branch_id');
             $table->timestamps();
 

@@ -14,7 +14,7 @@ console.log('REVERB VARIABLES:', {
 // Initialize Echo and expose a ready promise
 const echoReadyPromise = new Promise((resolve) => {
     if (
-        import.meta.env.VITE_REVERB_APP_KEY && 
+        import.meta.env.VITE_REVERB_APP_KEY &&  
         import.meta.env.VITE_REVERB_HOST && 
         import.meta.env.VITE_REVERB_PORT
     ) {
