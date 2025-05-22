@@ -1,28 +1,17 @@
 import axios from 'axios';
 window.axios = axios;
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allow your team to quickly build robust real-time web applications.
- */
-
-// import './echo';  
-
-// Jika menggunakan Event Broadcasting
-// Import Echo
+// Import Echo jika diperlukan
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
-// Cek apakah konfigurasi Pusher tersedia
+// Setup Echo dengan Pusher jika konfigurasi tersedia
 const pusherKey = import.meta.env.VITE_PUSHER_APP_KEY || '';
 const pusherCluster = import.meta.env.VITE_PUSHER_APP_CLUSTER || '';
 
 if (pusherKey && pusherCluster) {
-    // Setup Pusher dan Echo
-    window.Pusher = Pusher;
+    window.Pusher = Pusher; 
     window.Echo = new Echo({
         broadcaster: 'pusher',
         key: pusherKey,
@@ -30,15 +19,10 @@ if (pusherKey && pusherCluster) {
         forceTLS: true
     });
 } else {
-    // Mock Echo jika konfigurasi Pusher tidak tersedia
-    console.warn('Pusher configuration missing. Using mock Echo object.');
+    // Echo mock jika konfigurasi tidak tersedia
     window.Echo = {
-        private: () => ({
-            listen: () => {}
-        }),
-        channel: () => ({
-            listen: () => {}
-        }),
+        private: () => ({ listen: () => {} }),
+        channel: () => ({ listen: () => {} }),
         join: () => ({
             listen: () => {},
             here: () => {},

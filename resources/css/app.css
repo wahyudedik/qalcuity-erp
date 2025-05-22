@@ -2,3 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 @import "flowbite/dist/flowbite.css";
+
+/* Custom scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    @apply dark:bg-gray-700;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+    @apply dark:bg-gray-600;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    @apply dark:bg-gray-500;
+}
+
+/* ERP specific components with @apply directives */
+@layer components {
+    .erp-card {
+        @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4;
+    }
+    
+    .erp-card-header {
+        @apply flex items-center justify-between mb-3 pb-2 border-b border-gray-200 dark:border-gray-700;
+    }
+    
+    .erp-card-title {
+        @apply text-sm font-semibold text-gray-900 dark:text-white;
+    }
+    
+    .erp-table {
+        @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-xs;
+    }
+    
+    .erp-table thead {
+        @apply bg-gray-50 dark:bg-gray-700;
+    }
+    
+    .erp-table th {
+        @apply px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+    }
+    
+    .erp-table tbody {
+        @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
+    }
+    
+    .erp-table td {
+        @apply px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-white;
+    }
+    
+    .erp-btn {
+        @apply inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+    
+    .erp-btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+    }
+    
+    .erp-btn-secondary {
+        @apply bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+    }
+    
+    .erp-input {
+        @apply block w-full text-xs rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white;
+    }
+    
+    .erp-label {
+        @apply block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1;
+    }
+    
+    .erp-select {
+        @apply block w-full text-xs rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white;
+    }
+    
+    .erp-badge {
+        @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+    }
+    
+    .erp-badge-success {
+        @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+    }
+    
+    .erp-badge-warning {
+        @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+    }
+    
+    .erp-badge-danger {
+        @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: block !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: #000;
+        background-color: #fff;
+    }
+    
+    .erp-card, .erp-table {
+        break-inside: avoid;
+    }
+}
