@@ -17,59 +17,6 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </button>
-
-                <!-- Branch selector -->
-                <div class="ml-4 md:ml-6">
-                    <button id="branch-dropdown-button" data-dropdown-toggle="branch-dropdown"
-                        class="text-gray-700 bg-white hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-blue-800 dark:text-white border border-gray-200 dark:border-gray-600"
-                        type="button">
-                        <span class="mr-2">Cabang Pusat</span>
-                        <svg class="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="branch-dropdown"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="branch-dropdown-button">
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cabang
-                                    Pusat</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cabang
-                                    Jakarta</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cabang
-                                    Bandung</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cabang
-                                    Surabaya</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Search Fitur --}}
-            <div class="flex items-center">
-                <form class="sm:pr-3" action="#" method="GET">
-                    <label for="products-search" class="sr-only">Search</label>
-                    <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-                        <input type="text" name="email" id="products-search"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Global Search....">
-                    </div>
-                </form>
             </div>
 
             <div class="flex items-center">
