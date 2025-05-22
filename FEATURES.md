@@ -11,6 +11,7 @@ Modul pabrik beton cair:
    - Notifikasi 
    - performance monitoring 
    - pengaturan umum (bahasa, warna, logo, favicon, email, dll)
+   - Log Activity
 
 0. User CRUD and Permission Role
    - User CRUD => Done
@@ -18,9 +19,9 @@ Modul pabrik beton cair:
    - Permission Role Assignment 
 
 0. Multi Cabang
-   - Multi Cabang CRUD
-   - Multi Cabang Assignment 
-   - Multi Cabang Reporting
+   - Multi Cabang CRUD => Done
+   - Multi Cabang Assignment => Done
+   - Multi Cabang Reporting => Bug Notification
 
 1. Keuangan
   - Akuntansi & Pembukuan 

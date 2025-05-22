@@ -127,8 +127,8 @@ Route::middleware(['auth', 'auth.user'])->group(function () {
 
 // Route untuk notifikasi
 Route::middleware(['auth'])->prefix('notifications')->group(function () {
-    Route::post('/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
-    Route::post('/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
-    Route::get('/download/{id}', [NotificationController::class, 'downloadFile'])->name('notifications.download');
-    Route::get('/json', [NotificationController::class, 'getNotificationsJson'])->name('notifications.json');
+    Route::post('/mark-as-read/{id}', [\App\Http\Controllers\Modul\Umum\NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('/mark-all-read', [\App\Http\Controllers\Modul\Umum\NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::get('/download/{id}', [\App\Http\Controllers\Modul\Umum\NotificationController::class, 'downloadFile'])->name('notifications.download');
+    Route::get('/json', [\App\Http\Controllers\Modul\Umum\NotificationController::class, 'getNotificationsJson'])->name('notifications.json');
 });

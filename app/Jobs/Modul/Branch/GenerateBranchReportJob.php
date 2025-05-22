@@ -41,97 +41,101 @@ class GenerateBranchReportJob implements ShouldQueue
             $user = \App\Models\Modul\Auth\User::find($this->userId);
 
             if (!$user) {
+                \Illuminate\Support\Facades\Log::error("User tidak ditemukan", ['user_id' => $this->userId]);
                 throw new \Exception("User tidak ditemukan");
             }
 
-            $reportData = $branchService->generateReport($this->filters);
+            \Illuminate\Support\Facades\Log::info("Starting report generation", [
+                'user_id' => $this->userId,
+                'type' => $this->reportType,
+                'filters' => $this->filters
+            ]);
 
-            // Perbaiki ekstensi file
-            $fileExtension = $this->reportType === 'pdf' ? 'pdf' : 'xlsx';
-            $fileName = 'branch_report_' . date('Y-m-d_H-i-s') . '.' . $fileExtension;
+            $reportData = $branchService->generateReport($this->filters);
             
+            \Illuminate\Support\Facades\Log::info("Report data generated", [
+                'branches_count' => count($reportData['branches'] ?? []),
+            ]);
+
             // Pastikan direktori ada
             $directory = "modul/branch";
             Storage::disk('public')->makeDirectory($directory);
             
+            $fileExtension = $this->reportType === 'pdf' ? 'pdf' : 'xlsx';
+            $fileName = 'branch_report_' . date('Y-m-d_H-i-s') . '.' . $fileExtension;
             $filePath = "{$directory}/{$fileName}";
-
+            
+            \Illuminate\Support\Facades\Log::info("File path prepared", ['path' => $filePath]);
+            
             // Implementasi pembuatan PDF/Excel berdasarkan $this->reportType
             if ($this->reportType === 'pdf') {
-                // Generate PDF using the dedicated Export class
+                \Illuminate\Support\Facades\Log::info("Generating PDF");
+                // Gunakan namespace lengkap untuk menghindari error
                 $export = new \App\Exports\Modul\Branch\BranchExport($reportData['branches'], $this->filters);
                 
-                // Perbaiki path template - perhatikan 'export' vs 'exports'
-                $pdfContent = \Barryvdh\DomPDF\Facade\Pdf::loadView('Modul.branch.export.branches-pdf', [
+                // Coba panggil view terlebih dahulu
+                $view = view('Modul.branch.export.branches-pdf', [
                     'export' => $export,
                     'branches' => $reportData['branches'],
                     'filters' => $this->filters,
                     'statistics' => $reportData['statistics'] ?? [],
                     'generatedAt' => now()
-                ])->output();
-
+                ])->render();
+                
+                \Illuminate\Support\Facades\Log::info("View rendered successfully");
+                
+                // Kemudian render PDF
+                $pdfContent = \Barryvdh\DomPDF\Facade\Pdf::loadHTML($view)->output();
+                \Illuminate\Support\Facades\Log::info("PDF content generated");
+                
                 Storage::disk('public')->put($filePath, $pdfContent);
+                \Illuminate\Support\Facades\Log::info("PDF file saved");
             } else {
-                // Generate Excel file
+                \Illuminate\Support\Facades\Log::info("Generating Excel");
                 $export = new \App\Exports\Modul\Branch\BranchExport($reportData['branches'], $this->filters);
                 $excelContent = \Maatwebsite\Excel\Facades\Excel::raw($export, \Maatwebsite\Excel\Excel::XLSX);
+                \Illuminate\Support\Facades\Log::info("Excel content generated");
+                
                 Storage::disk('public')->put($filePath, $excelContent);
+                \Illuminate\Support\Facades\Log::info("Excel file saved");
             }
 
-            // Gunakan URL, bukan path
-            $fileUrl = url(Storage::disk('public')->url($filePath));
+            // Gunakan URL yang dapat diakses
+            $fileUrl = url('storage/' . $filePath);
+            \Illuminate\Support\Facades\Log::info("File URL generated", ['url' => $fileUrl]);
+            
+            // Buat notifikasi dengan lebih detail
+            \Illuminate\Support\Facades\Log::info("Creating notification");
 
-            // Create database notification
-            $user->notifications()->create([
+            // Gunakan DatabaseNotification class langsung
+            $notificationId = \Illuminate\Support\Str::uuid()->toString();
+            
+            \Illuminate\Support\Facades\DB::table('notifications')->insert([
+                'id' => $notificationId,
                 'type' => 'App\Notifications\ReportGenerated',
-                'data' => [
+                'notifiable_type' => get_class($user),
+                'notifiable_id' => $user->id,
+                'data' => json_encode([
                     'message' => 'Laporan ' . strtoupper($this->reportType) . ' cabang telah siap',
                     'url' => $fileUrl,
                     'type' => $this->reportType,
                     'icon' => $this->reportType === 'pdf' ? 'pdf' : 'excel',
                     'time' => now()->toIso8601String()
-                ]
+                ]),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
-
-            // Broadcast event for real-time notification (opsional)
-            if (class_exists('\App\Events\Modul\Branch\ReportGeneratedEvent')) {
-                event(new \App\Events\Modul\Branch\ReportGeneratedEvent(
-                    $this->userId,
-                    $fileUrl,
-                    $this->reportType
-                ));
-            }
             
-            // Log success
-            \Illuminate\Support\Facades\Log::info("Report successfully generated", [
-                'type' => $this->reportType,
-                'path' => $filePath,
-                'url' => $fileUrl,
-                'user_id' => $this->userId
-            ]);
+            \Illuminate\Support\Facades\Log::info("Notification created successfully", ['id' => $notificationId]);
             
         } catch (\Exception $e) {
-            // Log error
-            \Illuminate\Support\Facades\Log::error("Error generating report", [
-                'type' => $this->reportType,
-                'error' => $e->getMessage(),
+            \Illuminate\Support\Facades\Log::error("Error in GenerateBranchReportJob", [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString()
             ]);
-
-            // Create error notification to user
-            if (isset($user)) {
-                $user->notifications()->create([
-                    'type' => 'App\Notifications\ReportFailed',
-                    'data' => [
-                        'message' => 'Gagal membuat laporan ' . strtoupper($this->reportType) . ': ' . $e->getMessage(),
-                        'type' => $this->reportType,
-                        'icon' => 'error',
-                        'time' => now()->toIso8601String()
-                    ]
-                ]);
-            }
-
-            // Rethrow exception to mark job as failed
+            
             throw $e;
         }
     }

@@ -77,26 +77,51 @@ class NotificationController extends Controller
      */
     public function getNotificationsJson()
     {
-        $notifications = auth()->user()->notifications()->latest()->take(10)->get();
-        $unreadCount = auth()->user()->unreadNotifications()->count();
+        try {
+            $user = auth()->user();
+            $notifications = \Illuminate\Support\Facades\DB::table('notifications')
+                ->where('notifiable_type', get_class($user))
+                ->where('notifiable_id', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->take(10)
+                ->get();
+            
+            $unreadCount = \Illuminate\Support\Facades\DB::table('notifications')
+                ->where('notifiable_type', get_class($user))
+                ->where('notifiable_id', $user->id)
+                ->whereNull('read_at')
+                ->count();
         
-        // Transform notifications for JSON response
-        $notifications = $notifications->map(function ($notification) {
-            return [
-                'id' => $notification->id,
-                'message' => $notification->data['message'] ?? 'Notifikasi baru',
-                'time' => $notification->created_at->diffForHumans(),
-                'icon' => $notification->data['icon'] ?? 'default',
-                'type' => $notification->data['type'] ?? 'default',
-                'url' => $notification->data['url'] ?? null,
-                'is_read' => $notification->read_at !== null,
-            ];
-        });
+            $notificationsData = $notifications->map(function($notification) {
+                $data = json_decode($notification->data, true);
+                return [
+                    'id' => $notification->id,
+                    'message' => $data['message'] ?? 'Notifikasi',
+                    'icon' => $data['icon'] ?? 'default',
+                    'time' => \Carbon\Carbon::parse($notification->created_at)->diffForHumans(),
+                    'is_read' => $notification->read_at !== null,
+                    'url' => $data['url'] ?? null,
+                    'type' => $data['type'] ?? null,
+                ];
+            });
         
-        return response()->json([
-            'notifications' => $notifications,
-            'unreadCount' => $unreadCount
-        ]);
+            return response()->json([
+                'notifications' => $notificationsData,
+                'unreadCount' => $unreadCount
+            ]);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error("Error getting notifications JSON", [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
+        
+            return response()->json([
+                'error' => 'Failed to load notifications',
+                'notifications' => [],
+                'unreadCount' => 0
+            ], 500);
+        }
     }
     
     /**

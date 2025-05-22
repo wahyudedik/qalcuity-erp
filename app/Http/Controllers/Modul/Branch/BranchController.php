@@ -162,9 +162,13 @@ class BranchController extends Controller
     public function exportPdf(Request $request)
     {
         $filters = $request->only(['city', 'province', 'is_active']);
-
+        \Illuminate\Support\Facades\Log::info("Dispatching PDF export job", [
+            'user_id' => auth()->id(),
+            'filters' => $filters
+        ]);
+        
         // Dispatch job to generate PDF asynchronously
-        $job = new GenerateBranchReportJob($filters, Auth::id(), 'pdf');
+        $job = new \App\Jobs\Modul\Branch\GenerateBranchReportJob($filters, auth()->id(), 'pdf');
         dispatch($job);
 
         return redirect()->route('branches.reports')
