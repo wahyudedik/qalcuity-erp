@@ -1,6 +1,6 @@
 import './bootstrap';
 import 'flowbite';
-import Alpine from 'alpinejs'; 
+import Alpine from 'alpinejs';
 
 // Initialize Alpine.js 
 window.Alpine = Alpine;
@@ -11,14 +11,51 @@ document.addEventListener('alpine:init', () => {
         sidebarCollapsed: localStorage.getItem('sidebarCollapsed') === 'true',
         rightSidebarOpen: false,
         activeModule: localStorage.getItem('activeModule') || 'dashboard',
-        
+
         init() {
             this.$watch('sidebarCollapsed', (value) => {
                 localStorage.setItem('sidebarCollapsed', value);
             });
-            
+
             this.$watch('activeModule', (value) => {
                 localStorage.setItem('activeModule', value);
+            });
+        }
+    }));
+
+    Alpine.store('moduleState', {
+        activeModule: localStorage.getItem('activeModule') || null,
+
+        setActiveModule(moduleName) {
+            this.activeModule = moduleName;
+            localStorage.setItem('activeModule', moduleName);
+        },
+
+        isModuleActive(moduleName) {
+            return this.activeModule === moduleName;
+        },
+
+        clearActiveModule() {
+            this.activeModule = null;
+            localStorage.removeItem('activeModule');
+        }
+    });
+
+    Alpine.data('responsiveLayout', () => ({
+        isMobileView: window.innerWidth < 768,
+
+        init() {
+            // Set sidebar collapsed on mobile by default
+            if (this.isMobileView && localStorage.getItem('sidebarCollapsed') === null) {
+                localStorage.setItem('sidebarCollapsed', 'true');
+            }
+
+            // Listen for window resize
+            window.addEventListener('resize', () => {
+                this.isMobileView = window.innerWidth < 768;
+                if (this.isMobileView && !this.sidebarCollapsed) {
+                    this.sidebarCollapsed = true;
+                }
             });
         }
     }));
@@ -27,7 +64,7 @@ document.addEventListener('alpine:init', () => {
 Alpine.start();
 
 // Initialize 3rd party libraries
-import Choices from 'choices.js'; 
+import Choices from 'choices.js';
 window.Choices = Choices;
 
 // Notification system
@@ -41,7 +78,7 @@ const notificationSystem = {
         if (!document.querySelector('[data-dropdown-toggle="notification-dropdown"]')) {
             return;
         }
-        
+
         this.fetchNotifications();
         setInterval(() => this.fetchNotifications(), 30000); // Check every 30 seconds
     },
@@ -58,12 +95,12 @@ const notificationSystem = {
     updateBadge(count) {
         const button = document.querySelector('[data-dropdown-toggle="notification-dropdown"]');
         if (!button) return;
-        
+
         const existingBadge = button.querySelector('.bg-red-500');
         if (existingBadge) {
             existingBadge.remove();
         }
-        
+
         if (count > 0) {
             const badge = document.createElement('div');
             badge.className = 'absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -right-1 dark:border-gray-900';
@@ -96,8 +133,8 @@ const notificationSystem = {
                 'Content-Type': 'application/json'
             }
         })
-        .then(() => this.fetchNotifications())
-        .catch(error => console.error('Error marking notification as read:', error));
+            .then(() => this.fetchNotifications())
+            .catch(error => console.error('Error marking notification as read:', error));
     },
 
     markAllAsRead() {
@@ -108,8 +145,8 @@ const notificationSystem = {
                 'Content-Type': 'application/json'
             }
         })
-        .then(() => this.fetchNotifications())
-        .catch(error => console.error('Error marking all notifications as read:', error));
+            .then(() => this.fetchNotifications())
+            .catch(error => console.error('Error marking all notifications as read:', error));
     }
 };
 
@@ -117,7 +154,7 @@ const notificationSystem = {
 const darkModeHandler = {
     init() {
         // Set initial state based on localStorage or system preference
-        if (localStorage.getItem('color-theme') === 'dark' || 
+        if (localStorage.getItem('color-theme') === 'dark' ||
             (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             this.showLightIcon();
@@ -160,14 +197,14 @@ const darkModeHandler = {
 };
 
 // Initialize functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     notificationSystem.init();
     darkModeHandler.init();
-    
+
     // Module search functionality
     const moduleSearch = document.getElementById('module-search');
     if (moduleSearch) {
-        moduleSearch.addEventListener('input', function(e) {
+        moduleSearch.addEventListener('input', function (e) {
             const searchTerm = e.target.value.toLowerCase();
             document.querySelectorAll('.module-card').forEach(card => {
                 const moduleName = card.querySelector('.module-name')?.textContent.toLowerCase();
@@ -179,11 +216,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Mobile sidebar toggle
     const sidebarToggle = document.getElementById('sidebar-toggle');
     if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function() {
+        sidebarToggle.addEventListener('click', function () {
             const alpineData = Alpine.getRoot(document.body).$data;
             if (alpineData.sidebarCollapsed !== undefined) {
                 alpineData.sidebarCollapsed = !alpineData.sidebarCollapsed;

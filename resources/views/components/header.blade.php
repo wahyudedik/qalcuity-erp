@@ -1,11 +1,29 @@
 <header class="sticky top-0 z-30 flex items-center w-full h-12 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-between w-full px-3">
         <div class="flex items-center">
+            <!-- Toggle sidebar button (if module is active) -->
+            <button x-show="$store.moduleState.activeModule !== null" 
+                    @click="sidebarCollapsed = !sidebarCollapsed" 
+                    type="button"
+                    class="p-1.5 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:outline-none">
+                <svg x-show="sidebarCollapsed" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                <svg x-show="!sidebarCollapsed" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
             <!-- Logo -->
             <a href="{{ route('dashboard') }}" class="flex items-center ml-2">
                 <img src="{{ asset('img/favicon.png') }}" class="h-6 mr-2" alt="Qalcuity Logo" />
                 <span class="self-center text-xs font-semibold whitespace-nowrap dark:text-white">Qalcuity ERP</span>
             </a>
+
+            <!-- Active Module Indicator - Show only on larger screens -->
+            <div x-show="$store.moduleState.activeModule !== null" class="hidden sm:flex ml-3 bg-teal-50 dark:bg-gray-700 rounded-lg px-2 py-1">
+                <span class="text-xs font-medium text-teal-700 dark:text-teal-400" x-text="$store.moduleState.activeModule === 'branch' ? 'Modul Cabang' : ($store.moduleState.activeModule === 'user' ? 'Modul Pengguna' : 'Modul ' + $store.moduleState.activeModule)"></span>
+            </div>
 
             <!-- Breadcrumb - Desktop only -->
             <nav class="hidden md:flex ml-4" aria-label="Breadcrumb">

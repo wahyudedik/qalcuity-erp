@@ -1,30 +1,44 @@
-<div x-show="rightSidebarOpen" class="fixed inset-0 z-40 bg-gray-900 bg-opacity-50 dark:bg-opacity-80 transition-opacity"
-    @click="rightSidebarOpen = false" x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0"></div>
+<div 
+    x-show="rightSidebarOpen" 
+    class="fixed inset-0 z-40 bg-gray-900 bg-opacity-50 dark:bg-opacity-80 transition-opacity" 
+    @click="rightSidebarOpen = false" 
+    x-transition:enter="transition ease-out duration-300" 
+    x-transition:enter-start="opacity-0" 
+    x-transition:enter-end="opacity-100" 
+    x-transition:leave="transition ease-in duration-200" 
+    x-transition:leave-start="opacity-100" 
+    x-transition:leave-end="opacity-0"
+></div>
 
-<aside x-show="rightSidebarOpen"
-    class="fixed top-0 right-0 z-50 h-screen overflow-y-auto bg-white dark:bg-gray-800 shadow-xl transition-transform duration-300 ease-in-out transform w-full md:w-80 lg:w-96"
-    x-transition:enter="transform transition ease-in-out duration-300" x-transition:enter-start="translate-x-full"
-    x-transition:enter-end="translate-x-0" x-transition:leave="transform transition ease-in-out duration-300"
-    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
-    @click.away="rightSidebarOpen = false" aria-label="Module Sidebar" tabindex="-1">
-    <div class="p-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
-        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Modul ERP</h3>
-        <button @click="rightSidebarOpen = false" type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+<aside
+    x-show="rightSidebarOpen"
+    class="fixed top-0 right-0 z-50 h-screen overflow-y-auto bg-white dark:bg-gray-800 shadow-xl transition-transform duration-300 ease-in-out transform w-full sm:w-80 lg:w-96"
+    x-transition:enter="transform transition ease-in-out duration-300"
+    x-transition:enter-start="translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transform transition ease-in-out duration-300"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="translate-x-full"
+    @click.away="rightSidebarOpen = false"
+    aria-label="Module Sidebar"
+    tabindex="-1"
+>
+    <div class="p-3 md:p-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Modul ERP</h3>
+        <button 
+            @click="rightSidebarOpen = false" 
+            type="button" 
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
             <span class="sr-only">Tutup modul</span>
         </button>
     </div>
 
-    <div class="p-4">
-        <div class="relative mb-4">
+    <div class="p-3 md:p-4">
+        <div class="relative mb-3 md:mb-4">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -45,11 +59,10 @@
                 ">
         </div>
 
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 overflow-y-auto max-h-[calc(100vh-140px)] scrollbar-thin">
+        <div class="grid grid-cols-3 sm:grid-cols-3 gap-2 md:gap-3 overflow-y-auto max-h-[calc(100vh-140px)] scrollbar-thin">
             <!-- Umum -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -61,7 +74,7 @@
 
             <!-- Administrasi -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -72,8 +85,9 @@
             </a>
 
             <!-- Pengguna -->
-            <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+            <a href="{{ route('users.index') }}"
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors"
+                @click.prevent="$store.moduleState.setActiveModule('user'); window.location.href='{{ route('users.index') }}'">
                 <svg class="w-8 h-8 mb-2 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,8 +98,9 @@
             </a>
 
             <!-- Cabang -->
-            <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+            <a href="{{ route('branches.index') }}"
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors"
+                @click.prevent="$store.moduleState.setActiveModule('branch'); window.location.href='{{ route('branches.index') }}'">
                 <svg class="w-8 h-8 mb-2 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -94,10 +109,10 @@
                 </svg>
                 <span class="text-xs font-medium text-gray-900 dark:text-white">Cabang</span>
             </a>
-            
+
             <!-- Keuangan -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -109,7 +124,7 @@
 
             <!-- Penjualan -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -120,7 +135,7 @@
 
             <!-- Produksi -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,7 +147,7 @@
 
             <!-- Gudang -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -143,7 +158,7 @@
 
             <!-- Karyawan -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -155,7 +170,7 @@
 
             <!-- Pengiriman -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -167,7 +182,7 @@
 
             <!-- Maintenance -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -181,7 +196,7 @@
 
             <!-- Proyek -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -193,7 +208,7 @@
 
             <!-- Quality -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -205,7 +220,7 @@
 
             <!-- Lab -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -217,7 +232,7 @@
 
             <!-- Analytics -->
             <a href="{{ route('dashboard') }}"
-                class="module-card flex flex-col items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
+                class="module-card flex flex-col items-center justify-center p-2 md:p-4 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-center transition-colors">
                 <svg class="w-8 h-8 mb-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

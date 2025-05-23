@@ -22,8 +22,66 @@
 </head>
 
 <body class="flex h-screen overflow-hidden bg-gray-100 dark:bg-gray-900">
-    <!-- Alpine.js data yang sudah ada di layout, tambahkan rightSidebarOpen -->
-    <div x-data="{ sidebarCollapsed: localStorage.getItem('sidebarCollapsed') === 'true', rightSidebarOpen: false }" class="flex w-full h-full">
+    <!-- Alpine.js data -->
+    <div x-data="{ 
+            sidebarCollapsed: window.innerWidth < 768 ? true : (localStorage.getItem('sidebarCollapsed') === 'true'), 
+            rightSidebarOpen: false,
+            get showModuleNav() { 
+                return $store.moduleState.activeModule !== null 
+            }
+        }" 
+        x-init="
+            $watch('sidebarCollapsed', (value) => {
+                localStorage.setItem('sidebarCollapsed', value);
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth < 768 && !sidebarCollapsed) {
+                    sidebarCollapsed = true;
+                }
+            });
+        "
+        class="flex w-full h-full">
+        
+        <!-- Left module navigation (conditionally shown) -->
+        <div x-show="showModuleNav" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="-translate-x-full"
+             x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-300"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="-translate-x-full"
+             :class="{'w-64': !sidebarCollapsed, 'w-0': sidebarCollapsed}"
+             class="fixed md:relative z-30 h-full overflow-y-auto bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300">
+            
+            <!-- Close button for mobile -->
+            <button @click="sidebarCollapsed = true" 
+                class="md:hidden absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Dynamically include the module navigation based on active module -->
+            <div x-show="$store.moduleState.activeModule === 'branch'">
+                @include('Modul.branch.layouts.nav-branch')
+            </div>
+            
+            <div x-show="$store.moduleState.activeModule === 'user'">
+                @include('Modul.auth.users.layouts.nav-user')
+            </div>
+            
+            <!-- Add more module navigations as needed -->
+            <!-- Example: -->
+            <!-- <div x-show="$store.moduleState.isModuleActive('finance')">
+                {{-- @include('Modul.finance.layouts.nav-finance') --}}
+            </div> -->
+        </div>
+
+        <!-- Overlay for mobile when sidebar is open -->
+        <div x-show="showModuleNav && !sidebarCollapsed" 
+             @click="sidebarCollapsed = true"
+             class="fixed inset-0 z-20 bg-black bg-opacity-50 md:hidden">
+        </div>
 
         <!-- Main content wrapper -->
         <div class="flex flex-col flex-1 h-full">
@@ -76,6 +134,21 @@
                             </button>
                         </div>
                     @endif
+
+                    <!-- Module navigation indicator if active -->
+                    <div x-show="$store.moduleState.activeModule !== null" class="mb-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="text-xs font-medium text-gray-500 dark:text-gray-400 mr-2">Modul Aktif:</span>
+                                <span class="text-xs font-semibold text-blue-600 dark:text-blue-400" x-text="$store.moduleState.activeModule === 'branch' ? 'Cabang' : $store.moduleState.activeModule"></span>
+                            </div>
+                            <button 
+                                @click="$store.moduleState.clearActiveModule(); showModuleNav = false; window.location.href = '{{ route('dashboard') }}';" 
+                                class="text-xs text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
+                                Keluar Modul
+                            </button>
+                        </div>
+                    </div>
 
                     <!-- Breadcrumb and titles -->
                     @hasSection('breadcrumb')
