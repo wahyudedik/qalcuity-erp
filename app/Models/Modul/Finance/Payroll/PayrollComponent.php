@@ -18,7 +18,7 @@ class PayrollComponent extends Model
         'type',
         'calculation_type',
         'default_value',
-        'formula',
+        'formula', 
         'is_taxable',
         'is_active',
         'sequence',

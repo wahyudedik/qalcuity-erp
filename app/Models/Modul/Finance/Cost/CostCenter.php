@@ -18,7 +18,7 @@ class CostCenter extends Model
         'code',
         'name',
         'description',
-        'is_active',
+        'is_active', 
         'parent_id',
         'branch_id',
     ];

@@ -17,7 +17,7 @@ class ReportTemplate extends Model
         'code',
         'type',
         'description',
-        'template_data',
+        'template_data', 
         'is_system',
         'is_active',
     ];

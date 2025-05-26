@@ -17,7 +17,7 @@ class CostCategory extends Model
     protected $fillable = [
         'name',
         'description',
-        'account_id',
+        'account_id', 
         'is_active',
     ];
 

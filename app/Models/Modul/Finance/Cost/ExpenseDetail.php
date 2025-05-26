@@ -19,7 +19,7 @@ class ExpenseDetail extends Model
         'description',
         'cost_category_id',
         'account_id',
-        'quantity',
+        'quantity', 
         'unit_price',
         'total_price',
         'has_receipt',

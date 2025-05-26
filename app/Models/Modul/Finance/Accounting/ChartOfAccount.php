@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Finance\Accounting;
+namespace App\Models\Modul\Finance\Accounting;
 
-use App\Models\Branch;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Modul\Auth\User;
+use App\Models\Modul\Branch\Branch;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ChartOfAccount extends Model
 {
@@ -17,7 +17,7 @@ class ChartOfAccount extends Model
     protected $table = 'finance_chart_of_accounts';
 
     protected $fillable = [
-        'account_code',
+        'account_code', 
         'name',
         'description',
         'type',

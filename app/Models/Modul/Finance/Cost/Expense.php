@@ -195,4 +195,4 @@ class Expense extends Model
 
         return $prefix . '-' . date('Ymd') . '-' . str_pad($number, 5, '0', STR_PAD_LEFT);
     }
-}
+} 

@@ -17,7 +17,7 @@ class PayslipDetail extends Model
         'payroll_component_id',
         'component_name',
         'type',
-        'amount',
+        'amount', 
         'calculation_note',
         'sequence',
     ];

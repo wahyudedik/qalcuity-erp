@@ -23,7 +23,7 @@ class ReportSchedule extends Model
         'day_of_week',
         'day_of_month',
         'month',
-        'time_of_day',
+        'time_of_day', 
         'parameters',
         'auto_email',
         'email_recipients',

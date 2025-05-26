@@ -21,7 +21,7 @@ class Report extends Model
         'name',
         'start_date',
         'end_date',
-        'finance_period_id',
+        'finance_period_id', 
         'parameters',
         'report_data',
         'status',

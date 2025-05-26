@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models\Finance\Accounting;
+namespace App\Models\Modul\Finance\Accounting;
 
 use App\Models\Branch;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FinancePeriod extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'finance_periods';
 
@@ -19,7 +20,7 @@ class FinancePeriod extends Model
         'name',
         'start_date',
         'end_date',
-        'status',
+        'status', 
         'notes',
         'branch_id',
     ];

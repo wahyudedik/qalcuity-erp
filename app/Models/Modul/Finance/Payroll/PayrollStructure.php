@@ -13,7 +13,7 @@ class PayrollStructure extends Model
     protected $table = 'finance_payroll_structures';
 
     protected $fillable = [
-        'name',
+        'name', 
         'description',
         'is_active',
     ];

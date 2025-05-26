@@ -19,7 +19,7 @@ class Journal extends Model
         'reference_number',
         'transaction_date',
         'description',
-        'status',
+        'status', 
         'finance_period_id',
         'source_type',
         'source_id',

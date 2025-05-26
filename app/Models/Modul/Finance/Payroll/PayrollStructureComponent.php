@@ -16,7 +16,7 @@ class PayrollStructureComponent extends Model
         'payroll_structure_id',
         'payroll_component_id',
         'default_value',
-        'formula',
+        'formula', 
         'sequence',
     ];
 

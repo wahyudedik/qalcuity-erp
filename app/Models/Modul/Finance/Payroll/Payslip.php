@@ -23,7 +23,7 @@ class Payslip extends Model
         'payroll_period_id',
         'payroll_structure_id',
         'from_date',
-        'to_date',
+        'to_date', 
         'payment_date',
         'gross_salary',
         'total_deduction',

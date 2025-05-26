@@ -19,7 +19,7 @@ class BudgetAllocation extends Model
         'cost_center_id',
         'cost_category_id',
         'account_id',
-        'allocated_amount',
+        'allocated_amount', 
         'used_amount',
         'remaining_amount',
         'notes',
