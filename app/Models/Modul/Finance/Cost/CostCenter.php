@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Models\Finance\Cost;
+namespace App\Models\Modul\Finance\Cost;
 
-use App\Models\Branch;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Modul\Branch\Branch;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Modul\Finance\Cost\BudgetAllocation;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CostCenter extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'finance_cost_centers';
 

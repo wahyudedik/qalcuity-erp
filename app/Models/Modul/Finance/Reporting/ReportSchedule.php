@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Models\Finance\Reporting;
+namespace App\Models\Modul\Finance\Reporting;
 
-use App\Models\Branch;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Modul\Auth\User;
+use App\Models\Modul\Branch\Branch;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Modul\Finance\Reporting\ReportTemplate;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReportSchedule extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'finance_report_schedules';
 

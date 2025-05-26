@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Models\Finance\Cost;
+namespace App\Models\Modul\Finance\Cost;
 
-use App\Models\Finance\Accounting\ChartOfAccount;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Modul\Finance\Cost\Expense;
+use App\Models\Modul\Finance\Cost\CostCategory;
+use App\Models\Modul\Finance\Accounting\ChartOfAccount;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExpenseDetail extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'finance_expense_details';
 
